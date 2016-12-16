@@ -19,7 +19,7 @@
 
 
 # Pull base image
-FROM zokeber/centos:latest
+FROM centos:latest
 
 # Maintener
 MAINTAINER Ibrahim Edib Kokdemir <kokdemir@gmail.com>
