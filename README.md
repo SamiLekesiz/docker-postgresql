@@ -1,12 +1,10 @@
-# PostgreSQL Dockerfile on CentOS 7
+# PostgreSQL 9.6 Dockerfile on CentOS 7
 
 This repository contains a Dockerfile to build a Docker Image for PostgreSQL on CentOS 7
 
-[![Build Status](https://travis-ci.org/zokeber/docker-postgresql.svg?branch=master)](https://travis-ci.org/zokeber/docker-postgresql)
-
 ## Base Docker Image
 
-* [zokeber/centos](https://registry.hub.docker.com/u/zokeber/centos/)
+* [centos](https://hub.docker.com/_/centos/)
 
 ## Usage
 
@@ -14,21 +12,15 @@ This repository contains a Dockerfile to build a Docker Image for PostgreSQL on 
 
 1. Install [Docker](https://www.docker.com/).
 
-2. You can download automated build from public Docker Hub Registry:
+``` build from Github ```
 
-``` docker pull zokeber/postgresql:latest ```
+To create an image, clone this repository and execute the following command on the docker-postgresql folder:
 
-
-**Another way: build from Github**
-
-To create the image zokeber/postgresql, clone this repository and execute the following command on the docker-postgresql folder:
-
-`docker build -t zokeber/postgresql:latest .`
+`docker build -t myname/postgresql:latest .`
 
 Another alternatively, you can build an image directly from Github:
 
-`docker build -t="zokeber/postgresql:latest" github.com/zokeber/docker-postgresql`
-
+`docker build -t="myname/postgresql:latest" github.com/kokdemir/docker-postgresql`
 
 ### Create and running a container
 
@@ -36,26 +28,26 @@ Another alternatively, you can build an image directly from Github:
 
 (Not recommended for production use)
 
-``` docker create -it -p 5432:5432 --name postgresql96 zokeber/postgresql ```
+``` docker create -it -p 5432:5432 --name mypg96 myname/postgresql ```
 
 **Start container:**
 
-``` docker start postgresql94 ```
+``` docker start postgresql96 ```
 
 
 **Another way to start a postgresql container:**
 
-``` docker run -d -p 5432:5432 --name postgresql94 zokeber/postgresql94 ```
+``` docker run -d -p 5432:5432 --name mypg96 myname/postgresql ```
 
 ### Connection methods:
 
 **PostgreSQL client:**
 
-`docker exec -it postgresql94 psql`
+`docker exec -it mypg96 psql`
 
 **Bash:**
 
-`docker exec -it postgresql94 bash`
+`docker exec -it mypg96 bash`
 
 
 ### Creating a database and username
@@ -63,15 +55,15 @@ Another alternatively, you can build an image directly from Github:
 You can create a postgresql database and superuser at launch. Use `DB_NAME`, `DB_USER` and `DB_PASS` variables.
 
 ```
-docker create -it -p 5432:5432 --name postgresql --env 'DB_USER=YOUR_USERNAME' --env 'DB_PASS=YOUR_PASSWORD' --env 'DB_NAME=YOUR_DATABASE' zokeber/postgresql
+docker create -it -p 5432:5432 --name mypg96 --env 'DB_USER=YOUR_USERNAME' --env 'DB_PASS=YOUR_PASSWORD' --env 'DB_NAME=YOUR_DATABASE' myname/postgresql
 
 ```
  
 If you don't set DB_PASS variable, an automatic password is generated for the PostgreSQL database user. Check to stdout/stderr log of container created:
 
 ```
-docker run -d -p 5432:5432 --name postgresql94 --env 'DB_USER=YOUR_USERNAME' --env 'DB_NAME=YOUR_DATABASE' zokeber/postgresql
-docker logs postgresql94
+docker run -d -p 5432:5432 --name mypg96 --env 'DB_USER=YOUR_USERNAME' --env 'DB_NAME=YOUR_DATABASE' myname/postgresql
+docker logs mypg96
 ```
 
 The output:
@@ -86,7 +78,7 @@ Password for "YOUR_USERNAME" created as: "aich3aaH0yiu"
 
 To connect to newly created postgresql container:
 
-`docker exec -it postgresql94 psql -U YOUR_USERNAME`
+`docker exec -it mypg96 psql -U YOUR_USERNAME`
 
 Another way to connect to postgresql container with your newly created user:
 
@@ -99,9 +91,4 @@ psql -U YOUR_USERNAME -h $(docker inspect --format {{.NetworkSettings.IPAddress}
 
 Stop the currently running image:
 
-``` docker stop postgresql94 ```
-
-
-Update the docker image:
-
-``` docker pull zokeber/postgresql:latest ```
+``` docker stop mypg96 ```
