@@ -20,7 +20,7 @@ To create an image, clone this repository and execute the following command on t
 
 Another alternatively, you can build an image directly from Github:
 
-`docker build -t="myname/postgresql:latest" github.com/kokdemir/docker-postgresql`
+`docker build -t="myname/postgresql:latest" github.com/edib/docker-postgresql`
 
 ### Create and running a container
 
