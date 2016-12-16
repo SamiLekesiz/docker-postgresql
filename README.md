@@ -36,7 +36,7 @@ Another alternatively, you can build an image directly from Github:
 
 (Not recommended for production use)
 
-``` docker create -it -p 5432:5432 --name postgresql94 zokeber/postgresql ```
+``` docker create -it -p 5432:5432 --name postgresql96 zokeber/postgresql ```
 
 **Start container:**
 
